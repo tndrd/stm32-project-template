@@ -29,12 +29,20 @@ set(CMAKE_CXX_FLAGS ${DEVICE_COMPILE_FLAGS})
 
 add_subdirectory(workspace/)
 
+if(CUSTOM_SYSTEM_INIT)
+  set(SYSTEM_INIT_SOURCE "")
+else()
+  set(SYSTEM_INIT_SOURCE ${DEVICE_SYSTEM_SRC})
+endif()
+
+message(INFO CUSTOM_SYSTEM_INIT=${CUSTOM_SYSTEM_INIT})
+
 set(CMAKE_EXECUTABLE_SUFFIX .elf)
 add_executable(${ELF_OUTPUT}
   common/syscalls.c
   common/sysmem.c
   ${DEVICE_STARTUP_SRC}
-  ${DEVICE_SYSTEM_SRC}
+  ${SYSTEM_INIT_SOURCE}
 )
 
 target_link_libraries(${ELF_OUTPUT} PRIVATE main)
