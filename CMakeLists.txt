@@ -45,4 +45,4 @@ add_executable(${ELF_OUTPUT}
   ${SYSTEM_INIT_SOURCE}
 )
 
-target_link_libraries(${ELF_OUTPUT} PRIVATE main)
+target_link_libraries(${ELF_OUTPUT} PRIVATE ${EXE_TARGET})
