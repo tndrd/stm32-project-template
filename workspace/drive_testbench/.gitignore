@@ -1,0 +1,13 @@
+/EWARM/Debug/
+/EWARM/settings/
+*.tmp
+*.dep
+*.ewd
+*.ewt
+/lwip_v2.1.2/doc/doxygen/output/
+Debug/
+lagrange_cb/
+settings/
+stm32f4discovery/
+testbench/
+china_kit/
