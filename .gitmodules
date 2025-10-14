@@ -5,3 +5,6 @@
 [submodule "lib/cmsis_device_f4"]
 	path = lib/cmsis_device_f4
 	url = https://github.com/STMicroelectronics/cmsis_device_f4
+[submodule "lib/cmsis-device-g4"]
+	path = lib/cmsis-device-g4
+	url = https://github.com/STMicroelectronics/cmsis-device-g4.git
