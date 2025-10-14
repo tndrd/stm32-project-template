@@ -14,14 +14,17 @@ include_directories(lib/CMSIS/CMSIS/Core/Include ${DEVICE_CMSIS_INCLUDE})
 set(DEVICE_COMPILE_FLAGS "  \
   -mcpu=${DEVICE_CORE}      \
   -mfpu=${DEVICE_FPU}       \
-  -D${DEVICE_FAMILY}        \
   -mthumb                   \
   -lc -lm -lstdc++ -lsupc++ \
+  -g                        \
 ")
+add_compile_definitions(${DEVICE_FAMILY_DEFS})
 
-set(CMAKE_EXE_LINKER_FLAGS "                                     \
-  -T ${CMAKE_SOURCE_DIR}/devices/${DEVICE_NAME}/linker_script.ld \
-  --specs=nosys.specs                                            \
+set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/devices/${DEVICE_NAME}/linker_script.ld)
+
+set(CMAKE_EXE_LINKER_FLAGS " \
+  -T ${LINKER_SCRIPT}        \
+  --specs=nosys.specs        \
 ")
 
 set(CMAKE_C_FLAGS ${DEVICE_COMPILE_FLAGS})
@@ -35,7 +38,7 @@ else()
   set(SYSTEM_INIT_SOURCE ${DEVICE_SYSTEM_SRC})
 endif()
 
-message(INFO CUSTOM_SYSTEM_INIT=${CUSTOM_SYSTEM_INIT})
+message(STATUS CUSTOM_SYSTEM_INIT=${CUSTOM_SYSTEM_INIT})
 
 set(CMAKE_EXECUTABLE_SUFFIX .elf)
 add_executable(${ELF_OUTPUT}
@@ -45,4 +48,5 @@ add_executable(${ELF_OUTPUT}
   ${SYSTEM_INIT_SOURCE}
 )
 
-target_link_libraries(${ELF_OUTPUT} PRIVATE main)
+target_link_libraries(${ELF_OUTPUT} PRIVATE ${EXE_TARGET})
+set_target_properties(${ELF_OUTPUT} PROPERTIES LINK_DEPENDS ${LINKER_SCRIPT})

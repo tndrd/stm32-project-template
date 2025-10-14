@@ -1,6 +1,10 @@
-set(DEVICE_FAMILY         STM32F407xx)
-set(DEVICE_CORE           cortex-m4  )
-set(DEVICE_FPU            fpv4-sp-d16)
+set(DEVICE_FAMILY_DEFS 
+  STM32F4
+  STM32F407xx
+)
+
+set(DEVICE_CORE           cortex-m4)
+set(DEVICE_FPU            auto)
 
 set(DEVICE_CMSIS_INCLUDE  lib/cmsis_device_f4/Include)
 set(DEVICE_STARTUP_SRC    lib/cmsis_device_f4/Source/Templates/gcc/startup_stm32f407xx.s)
