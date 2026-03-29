@@ -17,7 +17,11 @@ set(DEVICE_COMPILE_FLAGS "  \
   -mthumb                   \
   -lc -lm -lstdc++ -lsupc++ \
   -g                        \
+  -fdata-sections           \
+  -ffunction-sections       \
+  -Wl,--gc-sections         \
 ")
+
 add_compile_definitions(${DEVICE_FAMILY_DEFS})
 
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/devices/${DEVICE_NAME}/linker_script.ld)
